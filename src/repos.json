@@ -1,0 +1,6 @@
+[
+	{
+		"name" : "datahub-angular",
+		"deploy": "cd ~/datahub.git && bash deploy.sh"
+	}
+]
