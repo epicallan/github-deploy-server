@@ -1,7 +1,7 @@
 [
 	{
 		"name" : "datahub-angular",
-		"deploy": "cd ~/datahub.git && bash deploy.sh",
+		"deploy": "cd /home/di && bash deploy.sh",
 		"ref": "refs/heads/deploy"
 	}
 ]

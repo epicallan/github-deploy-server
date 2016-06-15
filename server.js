@@ -6,7 +6,7 @@ var app = require('./src/app');
 /**
  * Get port from environment and store in Express.
  */
-var PORT = process.env.PORT || '7777';
+var PORT = process.env.PORT || '5000';
 // Use the Express application instance to listen to the '3000' port
 app.listen(PORT);
 
