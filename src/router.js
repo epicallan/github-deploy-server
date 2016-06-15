@@ -9,19 +9,9 @@ router.get('/', function(req, res) {
 });
 
 router.post('/deploy', function(req, res) {
-    var payload;
-    if (typeof req.body === 'object'){
-      payload = req.body.payload;
-    } else {
-        console.log(req.body);
-        payload = JSON.parse(req.body);
-    }
-    _.each (repos, function (repo) {
-        console.log('repository.name: ', payload.repository.name);
-        if (repo.name === payload.repository.name &&
-            payload.ref.indexOf(repo.ref) >= 0) {
-                run_cmd(repo.deploy);
-        }
+    var payload = req.body;
+    _.each(repos, function (repo) {
+        if (repo.name === payload.repository.name) run_cmd(repo.deploy);
         res.send('deployed');
     });
 });
