@@ -1,7 +1,7 @@
 var express = require ('express');
 var _ = require ('underscore');
 var repos = require ('./repos');
-var run_cmd = require ('./run_cmd').run_cmd;
+var run_cmd = require ('./runCmd').run_cmd;
 var router = express.Router();
 
 router.get('/', function(req, res) {
