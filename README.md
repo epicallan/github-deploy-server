@@ -1,7 +1,7 @@
 ### How to run this project?
 1. Clone the repo [@Github](http://github.com/epicallan/github-deploy-server)<br>
-2. Install the NPM dependencies by `npm install`<br>
+2. Install the NPM dependencies by `npm install && npm install forever -g`<br>
 3. Write your repo settings into `repos.json`<br>
-4. Finally, run  `npm start` <br>
+4. Finally, run  `sudo PORT=5000 NODE_ENV=production forever start server.js` <br>
 
 @ MIT LICENSED
