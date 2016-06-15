@@ -11,7 +11,7 @@ router.get('/', function(req, res) {
 router.post('/deploy', function(req, res) {
     var payload = req.body;
     _.each(repos, function (repo) {
-        if (repo.name === payload.repository.name) run_cmd(repo.deploy);
+        if (repo.name === payload.repository.name && payload.ref === repo.ref) run_cmd(repo.deploy);
         res.send('deployed');
     });
 });
