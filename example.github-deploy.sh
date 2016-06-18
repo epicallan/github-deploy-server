@@ -1,26 +1,28 @@
 #!/bin/sh
 ### BEGIN INIT INFO
-Provides:          github-deploy
-Required-Start:    $local_fs $network $named $time $syslog
-Required-Stop:     $local_fs $network $named $time $syslog
-Default-Start:     2 3 4 5
-Default-Stop:      0 1 6
-Description:       serve to handle auto deployment of docker containers using github hooks
+#Provides:          deploy
+#Required-Start:    $local_fs $network $named $time $syslog
+#Required-Stop:     $local_fs $network $named $time $syslog
+#Default-Start:     2 3 4 5
+#Default-Stop:      0 1 6
+#Description:       serve to handle auto deployment of docker containers using github hooks
 ### END INIT INFO
-NAME = github-deploy
-SCRIPT=PORT=5000 NODE_ENV=production node server.js
-RUNAS=<USER>
+NAME=deploy
+PORT=5000
+NODE_ENV=production
+RUNAS=<USER> # replace with user name
+DIR=/home/di/github-deploy-server
+PIDFILE=$DIR/$NAME.pid
+LOGFILE=$DIR/$NAME.log
 
-PIDFILE=/var/run/$NAME.pid
-LOGFILE=/var/log/$NAME.log
 
 start() {
-  if [ -f /var/run/$PIDNAME ] && kill -0 $(cat /var/run/$PIDNAME); then
+  if [ -f $PIDFILE ] && kill -0 $(cat $PIDFILE); then
     echo 'Service already running' >&2
     return 1
   fi
   echo 'Starting service…' >&2
-  local CMD="$SCRIPT &> \"$LOGFILE\" & echo \$!"
+  local CMD="cd $DIR && node server.js &> \"$LOGFILE\" & echo \$!"
   su -c "$CMD" $RUNAS > "$PIDFILE"
   echo 'Service started' >&2
 }
@@ -43,7 +45,7 @@ uninstall() {
     stop
     rm -f "$PIDFILE"
     echo "Notice: log file is not be removed: '$LOGFILE'" >&2
-    update-rc.d -f <NAME> remove
+    update-rc.d -f $NAME remove
     rm -fv "$0"
   fi
 }
