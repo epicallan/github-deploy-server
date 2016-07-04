@@ -2,11 +2,13 @@
 	{
 		"name" : "datahub-angular",
 		"deploy": "cd ~/datahub && bash deploy.sh",
-		"ref": "refs/heads/deploy"
+		"ref": "refs/heads/deploy",
+		"domain": "data.devinit.org"
 	},
 	{
 		"name" : "devinit-wp-theme",
 		"deploy": "cd ~/devinit && bash deploy.sh",
-		"ref": "refs/heads/deploy"
+		"ref": "refs/heads/deploy",
+		"domain": "data.devinit.org:8000"
 	}
 ]
