@@ -23,12 +23,12 @@ function checkDomainStatus(repo, callback) {
       if (repo.count < 3) return runDeployCmd(repo, callback);
       return mailer(`Domain is down on port ${port}`, repo.domain);
     });
-  }, 5000);
+  }, 10000);
 }
 
 function deploymentCb(error, repo) {
   console.log(`In deployment callback for ${repo.name} ${repo.ref} try: `, repo.count);
-  if (error && repo.count < 3) return deploymentCb(repo, deploymentCb);
+  if (error && repo.count < 3) return runDeployCmd(repo, deploymentCb);
   if (error && repo.count === 3 && repo.domain) return mailer(error.toString(), repo.domain);
   return checkDomainStatus(repo, deploymentCb);
 }
