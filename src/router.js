@@ -28,7 +28,7 @@ function checkDomainStatus(repo, callback) {
 
 function deploymentCb(error, repo) {
   console.log(`In deployment callback for ${repo.name} ${repo.ref} try: `, repo.count);
-  if (error && repo.count < 3) return runDeployCmd(repo, deploymentCb);
+  if (error && repo.count < 3) return deploymentCb(repo, deploymentCb);
   if (error && repo.count === 3 && repo.domain) return mailer(error.toString(), repo.domain);
   return checkDomainStatus(repo, deploymentCb);
 }
