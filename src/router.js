@@ -16,18 +16,18 @@ function checkDomainStatus(repo, callback) {
     ping(repo.domain, port)
     .then(time => {
       mailer('domain is up and running!!, succesful deployment', repo.domain);
-      console.log(`succesfully pinged domain: ${time}`, repo.domain);
+      console.log(`succesfully pinged domain at ${port} for time ${time}`, repo.domain);
     })
     .catch(error => {
       console.log(`Failed to ping: ${error}`, repo.domain);
       if (repo.count < 3) return runDeployCmd(repo, callback);
-      return mailer(`Failed to ping: ${error}`, repo.domain);
+      return mailer(`Domain is down on port ${port}`, repo.domain);
     });
   }, 5000);
 }
 
 function deploymentCb(error, repo) {
-  console.log(`In deployment callback for : ${repo.name} ${repo.ref}`, repo.count);
+  console.log(`In deployment callback for ${repo.name} ${repo.ref} try: `, repo.count);
   if (error && repo.count < 3) return runDeployCmd(repo, deploymentCb);
   if (error && repo.count === 3 && repo.domain) return mailer(error.toString(), repo.domain);
   return checkDomainStatus(repo, deploymentCb);
