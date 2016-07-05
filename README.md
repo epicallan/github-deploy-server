@@ -5,7 +5,7 @@
 4. Finally, run  `NODE_ENV=production forever start server.js`
 
 ## TODO
-- check status of a deployed service and try re-deploy if service is off.
-- Email specified group of people service status
+- ~check status of a deployed service and try re-deploy if service is off.
+- ~Email specified group of people service status
 
 @ MIT LICENSED

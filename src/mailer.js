@@ -1,8 +1,8 @@
 const nodemailer = require('nodemailer');
-const { user, pass } = require('./config');
+const { user, pass } = require('./configs/config');
+const listofEmails = require('./configs/email-list');
 
 const transporter = nodemailer.createTransport(`smtps://${user}%40gmail.com:${pass}@smtp.gmail.com`);
-const listofEmails = ['allan.lukwago@devinit.org', 'epicallan.al@gmail.com'];
 
 const mailOptions = (emails, message, domain) => ({
   from: '"datahub deploy server" <epicallan.al@gmail.com>', // sender address
