@@ -1,14 +1,22 @@
-[
-	{
-		"name" : "datahub-angular",
-		"deploy": "cd ~/datahub && bash deploy.sh",
-		"ref": "refs/heads/deploy",
+[{
+    "name": "datahub-angular",
+    "deploy": "cd ~/datahub && bash deploy.sh",
+    "ref": "refs/heads/deploy",
+		"port": 80,
 		"domain": "data.devinit.org"
-	},
-	{
-		"name" : "devinit-wp-theme",
-		"deploy": "cd ~/devinit && bash deploy.sh",
-		"ref": "refs/heads/deploy",
-		"domain": "data.devinit.org:8000"
-	}
-]
+}, {
+    "name": "datahub-angular",
+    "deploy": "cd ~/datahub && bash staging.sh",
+    "ref": "refs/heads/staging",
+		"port": 8888,
+		"domain": "data.devinit.org"
+}, {
+    "name": "devinit-wp-theme",
+    "deploy": "cd ~/devinit && bash deploy.sh",
+    "ref": "refs/heads/deploy"
+
+}, {
+    "name": "digital-platform",
+    "deploy": "cd ~/di-api && bash deploy.sh",
+    "ref": "refs/heads/development"
+}]

@@ -1,12 +1,12 @@
 /**
  * Module dependencies.
  */
-var app = require('./src/app');
+const app = require('./src/app');
 
 /**
  * Get port from environment and store in Express.
  */
-var PORT = process.env.PORT || '5000';
+const PORT = process.env.PORT || '5000';
 // Use the Express application instance to listen to the '3000' port
 app.listen(PORT);
 

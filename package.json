@@ -1,9 +1,10 @@
 {
   "name": "github-deploy-server",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon server.js",
+    "test": " NODE_ENV=test mocha $(find src -name '*-test.js') --watch"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -12,5 +13,27 @@
     "node-http-ping": "^0.2.2",
     "nodemailer": "^2.4.2",
     "underscore": "^1.8.3"
-  }
+  },
+  "author": {
+    "name": "Allan",
+    "email": "epicallan.al@gmail.com"
+  },
+  "keywords": [
+    "github",
+    "git",
+    "deploy server",
+    "github webhooks"
+  ],
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "eslint": "^3.0.0",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.10.2",
+    "eslint-plugin-jsx-a11y": "^1.5.3",
+    "eslint-plugin-react": "^5.2.2",
+    "mocha": "^2.5.3"
+  },
+  "engines": {
+    "node": ">=6.0.1"
+  },
 }
