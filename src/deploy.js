@@ -23,6 +23,6 @@ module.exports = function deploy(repo, callback) {
 
   proc.on('close', (code) => {
     console.log('exit code', code);
-    deployCb(null);
+    deployCb(code);
   });
 };
