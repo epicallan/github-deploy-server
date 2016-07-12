@@ -19,7 +19,7 @@ function emailer(msg, domain, callback) {
   return transporter.sendMail(options, (error, info) => {
     if (error) return console.log(error);
     console.log(`Message sent: ${info.response}`);
-    if (callback) callback(error, info);
+    if (callback) return callback(error, info);
     return info;
   });
 }
