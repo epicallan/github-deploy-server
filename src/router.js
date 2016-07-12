@@ -6,10 +6,7 @@ const mailer = require('./mailer');
 /* eslint-disable new-cap */
 const router = express.Router();
 
-// bug: immediate calls have been found to cause git clone errors
-const runDeployCmd = (repo, callback) => setTimeout(() => deploy(repo, callback), 3000);
-
-function checkDomainStatus(repo, callback) {
+function checkDomainStatus(repo) {
   if (repo.domain === undefined) return false;
   const port = repo.port || 80;
   return setTimeout(() => {
@@ -20,17 +17,19 @@ function checkDomainStatus(repo, callback) {
     })
     .catch(error => {
       console.log(`Failed to ping: ${error}`, repo.domain);
-      if (repo.count < 3) return runDeployCmd(repo, callback);
-      return mailer(`Domain is down on port ${port}`, repo.domain);
+      mailer(`Domain is down on port ${port}`, repo.domain);
     });
   }, 10000);
 }
 
-function deploymentCb(error, repo) {
+function deploymentCb(error, stdout, stderr) {
+  const repo = this;
   console.log(`In deployment callback for ${repo.name} ${repo.ref} try: `, repo.count);
-  if (error && repo.count < 3) return runDeployCmd(repo, deploymentCb);
+  console.log(`stdout: ${stdout}`);
+  console.log(`stderr: ${stderr}`);
+  if (error && repo.count < 3) return deploy(repo, deploymentCb);
   if (error && repo.count === 3 && repo.domain) return mailer(error.toString(), repo.domain);
-  return checkDomainStatus(repo, deploymentCb);
+  return checkDomainStatus(repo);
 }
 
 router.get('/', (req, res) => {
@@ -42,7 +41,7 @@ router.post('/deploy', (req, res) => {
   repos.forEach((repo) => {
     if (repo.name === payload.repository.name && payload.ref === repo.ref) {
       repo.count = 0;
-      runDeployCmd(repo, deploymentCb);
+      deploy(repo, deploymentCb);
     }
   });
   res.send('deployed');

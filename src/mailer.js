@@ -14,8 +14,9 @@ const mailOptions = (emails, message, domain) => ({
 
 function emailer(msg, domain, callback) {
   const options = mailOptions(listofEmails, msg, domain);
+  if (process.env.NODE_ENV === 'development') return false;
   // send mail with defined transport object
-  transporter.sendMail(options, (error, info) => {
+  return transporter.sendMail(options, (error, info) => {
     if (error) return console.log(error);
     console.log(`Message sent: ${info.response}`);
     if (callback) callback(error, info);
