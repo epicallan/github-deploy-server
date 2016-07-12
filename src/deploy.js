@@ -1,7 +1,6 @@
 
-/* eslint-disable no-param-reassign */
 const exec = require('child_process').exec;
-
+/* eslint-disable no-param-reassign */
 module.exports = function deploy(repo, callback) {
   repo.count ++;
   const deployCb = callback.bind(repo);
