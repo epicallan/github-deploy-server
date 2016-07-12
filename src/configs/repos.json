@@ -1,12 +1,12 @@
 [{
     "name": "datahub-angular",
-    "deploy": "cd ~/datahub && bash deploy.sh",
+    "deploy": "cd ~/datahub && rm -rf datahub.git && bash deploy.sh",
     "ref": "refs/heads/deploy",
 		"port": 80,
 		"domain": "data.devinit.org"
 }, {
     "name": "datahub-angular",
-    "deploy": "cd ~/datahub && bash staging.sh",
+    "deploy": "cd ~/datahub && rm -rf staging.git && bash staging.sh",
     "ref": "refs/heads/staging",
 		"port": 8888,
 		"domain": "data.devinit.org"
