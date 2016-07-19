@@ -1,4 +1,4 @@
 module.exports = [
-  'allan.lukwago@devinit.org',
-  'epicallan.al@gmail.com'
+  'user@devinit.org',
+  'user@gmail.com'
 ];
