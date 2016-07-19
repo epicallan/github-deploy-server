@@ -3,12 +3,12 @@ const exec = require('child_process').exec;
 /* eslint-disable no-param-reassign */
 module.exports = function deploy(repo, callback) {
   repo.count ++;
-
   const deployCb = callback.bind(repo);
 
   const proc = exec(repo.deploy);
 
   proc.stdout.on('data', (data) => {
+    deployCb(null);
     console.log(`stdout: ${data}`);
   });
 
