@@ -28,6 +28,7 @@ function startDeployWorker(repo) {
 router.get('/', (req, res) => {
   res.send('deploy server is running');
 });
+
 /* eslint-disable no-param-reassign */
 router.post('/deploy', (req, res) => {
   const payload = req.body;

@@ -24,7 +24,6 @@ function deploymentCb(code, repo) {
   return checkDomainStatus(repo);
 }
 
-
 process.on('message', (repo) => {
   const date = new Date();
   console.log(date, `${repo.name} : ${repo.ref}`);
