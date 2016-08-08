@@ -33,6 +33,6 @@ process.on('message', (repo) => {
 process.send({ foo: 'bar' });
 
 process.on('exit', (code) => {
-  // this child processes exits in the mailer function
+  // this child processes exits in the mailer function if it hasnt already automatically
   console.log('Worker Process exited:', code);
 });
