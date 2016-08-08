@@ -3,6 +3,11 @@ const repos = require('./configs/repos');
 const deploy = require('./deploy');
 const ping = require('node-http-ping');
 const mailer = require('./mailer');
+const path = require('path');
+const forkWorker = require('child_process').fork;
+
+const worker = path.resolve(process.cwd(), 'src/worker.js');
+
 /* eslint-disable new-cap */
 const router = express.Router();
 // there should be only one instance of the deployment process
@@ -35,6 +40,10 @@ function deploymentCb(error) {
   if (error && repo.count === 3 && repo.domain) return mailer(error.toString(), repo.domain);
   return checkDomainStatus(repo); // probably all went well and we check whether domain is up
 }
+router.get('/test', (req, res) => {
+  forkWorker(worker);
+  res.send('test');
+});
 
 router.get('/', (req, res) => {
   res.send('deploy server is running');
@@ -50,6 +59,8 @@ router.post('/deploy', (req, res) => {
         console.log(repo.name, date);
         repo.count = 0;
         deploy(repo, deploymentCb);
+        // worker(repo, deploymentCb);
+        // fork('worker');
       }
     }
   });
