@@ -14,14 +14,14 @@ const mailOptions = (emails, message, domain) => ({
 
 function emailer(msg, domain, callback) {
   // we dont send emails while in development environment
-  if (process.env.NODE_ENV === 'development') return false;
+  // if (process.env.NODE_ENV === 'development') return false;
   const options = mailOptions(listofEmails, msg, domain);
   // send mail with defined transport object
   return transporter.sendMail(options, (error, info) => {
     if (error) return console.log(error);
-    console.log(`Message sent: ${info.response}`);
     if (callback) return callback(error, info);
-    return info;
+    console.log(`Message sent: ${info.response}`);
+    return process.exit(); // exiting child
   });
 }
 module.exports = emailer;
