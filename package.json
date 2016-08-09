@@ -3,7 +3,7 @@
   "version": "0.0.3",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "NODE_ENV=production node server.js",
     "dev": "NODE_ENV=development nodemon server.js",
     "test": " NODE_ENV=test mocha $(find src -name '*-test.js') --watch"
   },
