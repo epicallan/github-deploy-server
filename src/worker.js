@@ -20,7 +20,7 @@ function checkDomainStatus(repo) {
 
 function deploymentCb(code, repo) {
   if (code !== 0) return mailer(code.toString(), repo.domain);
-  process.disconnect(); // process will prepare to exit if it has no more work
+  process.disconnect(); // process will prepare to exit if it has no more work and disconnect from the master process
   return checkDomainStatus(repo);
 }
 
@@ -30,7 +30,6 @@ process.on('message', (repo) => {
   deploy(repo, deploymentCb);
 });
 
-process.send({ foo: 'bar' });
 
 process.on('exit', (code) => {
   // this child processes exits in the mailer function if it hasnt already automatically
