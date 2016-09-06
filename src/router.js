@@ -3,7 +3,7 @@ const repos = require('./configs/repos');
 const path = require('path');
 const child = require('child_process').fork;
 
-const worker = path.resolve(process.cwd(), 'src/worker.js');
+const worker = path.resolve(__dirname, 'worker.js');
 
 /* eslint-disable new-cap */
 const router = express.Router();

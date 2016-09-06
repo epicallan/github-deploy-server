@@ -20,7 +20,8 @@ function checkDomainStatus(repo) {
 
 function deploymentCb(code, repo) {
   if (code !== 0) return mailer(code.toString(), repo.domain);
-  process.disconnect(); // process will prepare to exit if it has no more work and disconnect from the master process
+  // process will prepare to exit if it has no more work and disconnect from the master process
+  process.disconnect();
   return checkDomainStatus(repo);
 }
 
