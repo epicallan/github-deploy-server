@@ -19,7 +19,7 @@ function checkDomainStatus(repo) {
 }
 
 function deploymentCb(code, repo) {
-  if (code !== 0) return mailer(code.toString(), repo.domain);
+  if (code !== 0) return mailer(code.toString(), repo.domain); // if code is not O then there was a problem, hence we send an email.
   // process will prepare to exit if it has no more work and disconnect from the master process
   process.disconnect();
   return checkDomainStatus(repo);
@@ -28,7 +28,7 @@ function deploymentCb(code, repo) {
 process.on('message', (repo) => {
   const date = new Date();
   console.log(date, `${repo.name} : ${repo.ref}`);
-  deploy(repo, deploymentCb);
+  deploy(repo, deploymentCb); // start deployment process
 });
 
 
